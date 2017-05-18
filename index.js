@@ -4,17 +4,28 @@ function getFirstSelector(selector){
 }
 
 function nestedTarget(){
-  var element = document.querySelector('div#id .nested');
+  var element = document.querySelector('#nested .target');
   return element;
 }
 
 function increaseRankBy(n) {
-  var ranked = document.querySelectorAll('.ranked-list')
-  for (var i = 0; i < ranked.length; i++) {
-  	var siblings = ranked[i];
-    while (siblings !== null) {
-    	var num = parseInt(siblings.HTML)+n;
-	  	siblings.innerHTML = num;
-    	siblings = siblings.nextElementSibling;
-  	}
+  const rank = document.querySelectorAll('.ranked-list');
+
+  for (let i = 0; i < rank.length; i++) {
+    let kids = rank[i].children;
+
+    for (let j = 0; j < kids.length; j++) {
+      kids[j].innerHTML = parseInt(kids[j].innerHTML) + n
+    }
   }
+}
+
+function deepestChild(){
+  let node = document.getElementById('grand-node');
+  let nextNode = node.children[0];
+  while(nextNode){
+    node = nextNode;
+    nextNode = node.children[0];
+  }
+  return node;
+}
